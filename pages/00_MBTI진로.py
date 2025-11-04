@@ -9,7 +9,8 @@ mbti_list = [
     "INTJ", "INTP", "ENTJ", "ENTP",
     "INFJ", "INFP", "ENFJ", "ENFP",
     "ISTJ", "ISFJ", "ESTJ", "ESFJ",
-    "ISTP", "ISFP", "ESTP", "ESFP"
+    "ISTP", "ISFP", "ESTP", "ESFP",
+    "cute"
 ]
 
 mbti = st.selectbox("👉 너의 MBTI를 골라봐!", mbti_list)
