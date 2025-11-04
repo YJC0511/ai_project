@@ -10,7 +10,7 @@ mbti_list = [
     "INFJ", "INFP", "ENFJ", "ENFP",
     "ISTJ", "ISFJ", "ESTJ", "ESFJ",
     "ISTP", "ISFP", "ESTP", "ESFP",
-    "cute"
+    "cute",
 ]
 
 mbti = st.selectbox("👉 너의 MBTI를 골라봐!", mbti_list)
@@ -31,8 +31,8 @@ career_dict = {
     "ISTP": ["엔지니어 ⚙️", "정비사 🔧"],
     "ISFP": ["디자이너 🎨", "사진작가 📸"],
     "ESTP": ["영업사원 💬", "스포츠 트레이너 🏋️‍♂️"],
-    "ESFP": ["배우 🎭", "연예기획자 💃"]
-    "cute": ["메이드🥞", "버튜버🤦‍♀️"]
+    "ESFP": ["배우 🎭", "연예기획자 💃"],
+    "cute": ["메이드 🥞", "버튜버 🤦‍♀️"],
 }
 
 if mbti:
