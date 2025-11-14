@@ -88,4 +88,3 @@ with tab2:
 
     st.plotly_chart(fig2, use_container_width=True)
 
-st.subheader("📌 Requirements.txt (아래 내용 그대로 requirements.txt 파일로 저장하세요)")("---")
