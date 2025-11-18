@@ -7,7 +7,7 @@ st.set_page_config(page_title="성범죄 피해자 분석", layout="wide")
 
 # 데이터 로드
 def load_data():
-    df = pd.read_csv("경찰청_성범죄 피해자 성별 연령별 현황_20241231.csv", encoding="utf-8")
+    df = pd.read_csv("sexcrime.csv", encoding="utf-8")
 
     # 컬럼명 자동 정리
     df.columns = df.columns.str.strip().str.replace(" ", "")
