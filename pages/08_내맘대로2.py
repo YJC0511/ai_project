@@ -58,10 +58,12 @@ ALL_CHARACTERS = [
 # 보유 캐릭터 기본값을 전체 캐릭터로 자동 입력
 char_input = st.sidebar.text_area(
     "캐릭터 이름을 줄바꿈으로 입력하세요 (기본: 전체 원신 캐릭터)",
-    value="\n".join(ALL_CHARACTERS)
+    value="
+".join(ALL_CHARACTERS)
 )
 
-characters = [c.strip() for c in char_input.split("\n") if c.strip()] [c.strip() for c in char_input.split("\n") if c.strip()]
+characters = [c.strip() for c in char_input.split("
+") if c.strip()] [c.strip() for c in char_input.split("\n") if c.strip()]
 
 team_size = st.sidebar.number_input("각 파티 인원", min_value=1, max_value=4, value=4)
 
@@ -109,8 +111,9 @@ st.markdown("---")
 st.info("원한다면 속성 균형(원소 조합), 힐러 필수 포함, 방깍/증폭 조합 등 고급 규칙도 추가해드릴 수 있습니다!")
 
 # --------------------
-# requirements.txt 내용 (별도 파일로 저장)
+# requirements.txt 내용 (Streamlit Cloud 업로드용)
 # --------------------
 # streamlit>=1.20
 # pandas
-
+# numpy
+# matplotlib
