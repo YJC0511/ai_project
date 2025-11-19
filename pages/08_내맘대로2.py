@@ -22,48 +22,33 @@ st.markdown("""
 st.sidebar.header("보유 캐릭터 목록 입력")
 # 전체 원신 캐릭터 목록 (2025 기준 최신)
 ALL_CHARACTERS = [
-    "Aether", "Lumine",
-    "Albedo", "Alhaitham", "Aloy", "Amber",
-    "Arlecchino", "Ayaka", "Ayato",
-    "Baizhu", "Barbara", "Beidou", "Bennett",
-    "Candace", "Charlotte", "Chevreuse", "Chiori",
-    "Chongyun", "Collei", "Cyno",
-    "Dehya", "Diluc", "Diona", "Dori",
-    "Eula",
-    "Faruzan", "Fischl", "Freminet", "Furina",
-    "Gaming", "Ganyu", "Gorou",
-    "Heizou", "Hu Tao",
-    "Itto",
-    "Jean", "Jiao", "Kachina",
-    "Kaeya", "Kaveh", "Keqing", "Kirara",
-    "Klee", "Kujou Sara", "Kuki Shinobu",
-    "Layla", "Lisa", "Lynette", "Lyney",
-    "Mika", "Mona",
-    "Nahida", "Navia", "Neuvillette", "Nilou", "Ningguang",
-    "Noelle",
-    "Qiqi",
-    "Raiden Shogun", "Razor", "Rosaria",
-    "Sangonomiya Kokomi", "Sayu", "Sethos",
-    "Shenhe", "Sucrose",
-    "Tartaglia", "Thoma", "Tighnari", "Traveler",
-    "Venti",
-    "Wanderer",
-    "Wriothesley",
-    "Xiangling", "Xianyun", "Xiao", "Xingqiu", "Xinyan",
-    "Yae Miko", "Yanfei", "Yaoyao", "Yelan", "Yoimiya",
-    "Yun Jin",
-    "Zhongli"
-]
+    "여행자(바람)", "여행자(바위)", "여행자(번개)", "여행자(풀)",
 
-# 보유 캐릭터 기본값을 전체 캐릭터로 자동 입력
-char_input = st.sidebar.text_area(
-    "캐릭터 이름을 줄바꿈으로 입력하세요 (기본: 전체 원신 캐릭터)",
-    value="
-".join(ALL_CHARACTERS)
-)
+    "엠버", "가아라(고로우)", "사라(쿠죠 사라)", "신학(셴허)", "이토", "클레", "모나", "바바라", "베넷",
+    "향릉", "행추", "북두", "설탕(슈크로스)", "연비", "요이미야", "야에 미코",
 
-characters = [c.strip() for c in char_input.split("
-") if c.strip()] [c.strip() for c in char_input.split("\n") if c.strip()]
+    "알베도", "다이루크", "감우", "유라", "디오나", "케이아", "리사", "노엘", "응광",
+
+    "치치", "진", "벤티", "레이저", "샹링", "신염", "토마", "쿠키 신obu", "사유",
+
+    "라이덴 쇼군", "야란", "푸리나", "느비예트(느비예뜨)", "나히다", "닐루", "데히야", "알하이탐", "카베",
+
+    "타르탈리아", "아이아토", "카미사토 아야카", "코코미(코코미 사농미야)", "원더러(방랑자)",
+
+    "콜레이", "타이나리", "도리", "사이노", "세토스",
+
+    "프레미네", "리니", "리넷", "샬롯",
+
+    "나비아", "클로린데", "치오리", "시토리(혹은 신규 표기 반영 가능)",
+
+    "종려", "호두", "중운", "루미네/에테르(여행자)",
+
+    "미카", "로자리아", "피슬", "파루잔", "헤이조", "야오야오",
+
+    "치치", "각청", "카즈하(카에데하라 카즈하)", "카키나? (신규 캐릭터면 추가 가능)",
+
+    "아를레키노", "체브레즈(슈브르즈)", "카산드라(추후 업데이트 시 반영)"
+]ip()]
 
 team_size = st.sidebar.number_input("각 파티 인원", min_value=1, max_value=4, value=4)
 
