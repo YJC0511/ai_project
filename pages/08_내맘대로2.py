@@ -1,104 +1,61 @@
-# Streamlit App: Genshin Impact Spiral Abyss Random Team Generator
-# File: app.py
-
 import streamlit as st
 import random
 import pandas as pd
 
-st.set_page_config(page_title="Genshin Spiral Abyss Random Team Generator", layout="wide")
-st.title("원신 나선비경 랜덤 덱 생성기")
+st.set_page_config(page_title="원신 나선비경 랜덤 파티", layout="wide", page_icon="🎮")
+st.title("🎮 원신 나선비경 랜덤 파티 생성기")
+st.markdown("선택한 캐릭터로 랜덤 파티 1·2 생성")
 
-st.markdown("""
-### 🔥 기능
-- 보유 캐릭터 목록 입력
-- 나선비경 **1파티 / 2파티** 자동 랜덤 생성
-- 중복 없이 캐릭터 배치
-- CSV 다운로드 기능
-""")
+# 공식 한글 캐릭터 전체 목록
+characters = [
+    "엠버", "리사", "카야", "바바라", "레이저", "앤티", "설탕", "노엘", "피슬", "베넷",
+    "향릉", "행추", "응광", "중운", "신염", "디오나", "로자리아", "연비", "북두", "토마",
+    "구라라", "시노부", "미카", "레이라", "패루잔", "린네", "린타", "쿠쿠", "알하이탐",
+    "데히야", "타이나리", "니루", "나히다", "야오야오", "카베", "시토리", "요이미야",
+    "코코미", "신학", "야에 미코", "아야카", "아야토", "호두", "유라", "소", "각청",
+    "진", "설윤", "감우", "치치", "중운", "응광", "종려", "타르탈리아", "푸리나",
+    "클레", "모나", "알베도", "라이덴", "카즈하", "야란", "휴톤", "방랑자", "선인",
+]
 
-# --------------------
-# Sidebar
-# --------------------
-st.sidebar.header("보유 캐릭터 목록 입력")
-# 전체 원신 캐릭터 목록 (2025 기준 최신)
-ALL_CHARACTERS = [
-    "여행자(바람)", "여행자(바위)", "여행자(번개)", "여행자(풀)",
+# 사이드바 설정
+st.sidebar.header("파티 설정")
+party_size = st.sidebar.slider("캐릭터 수 (파티별)", 1, 4, 4)
 
-    "엠버", "가아라(고로우)", "사라(쿠죠 사라)", "신학(셴허)", "이토", "클레", "모나", "바바라", "베넷",
-    "향릉", "행추", "북두", "설탕(슈크로스)", "연비", "요이미야", "야에 미코",
+st.sidebar.markdown("---")
+st.sidebar.write("총 캐릭터 수: {}명".format(len(characters)))
 
-    "알베도", "다이루크", "감우", "유라", "디오나", "케이아", "리사", "노엘", "응광",
-
-    "치치", "진", "벤티", "레이저", "샹링", "신염", "토마", "쿠키 신obu", "사유",
-
-    "라이덴 쇼군", "야란", "푸리나", "느비예트(느비예뜨)", "나히다", "닐루", "데히야", "알하이탐", "카베",
-
-    "타르탈리아", "아이아토", "카미사토 아야카", "코코미(코코미 사농미야)", "원더러(방랑자)",
-
-    "콜레이", "타이나리", "도리", "사이노", "세토스",
-
-    "프레미네", "리니", "리넷", "샬롯",
-
-    "나비아", "클로린데", "치오리", "시토리(혹은 신규 표기 반영 가능)",
-
-    "종려", "호두", "중운", "루미네/에테르(여행자)",
-
-    "미카", "로자리아", "피슬", "파루잔", "헤이조", "야오야오",
-
-    "치치", "각청", "카즈하(카에데하라 카즈하)", "카키나? (신규 캐릭터면 추가 가능)",
-
-    "아를레키노", "체브레즈(슈브르즈)", "카산드라(추후 업데이트 시 반영)"
-]ip()]
-
-team_size = st.sidebar.number_input("각 파티 인원", min_value=1, max_value=4, value=4)
-
-st.sidebar.write(f"총 보유 캐릭터 수: **{len(characters)}명**")
-
-# --------------------
-# Team Generation
-# --------------------
-def generate_two_teams(chars, size):
-    if len(chars) < size * 2:
-        return None, None, "⚠️ 캐릭터 수가 부족합니다. 최소 " + str(size * 2) + "명 필요합니다."
-
-    pool = chars.copy()
-    random.shuffle(pool)
-
-    team1 = pool[:size]
-    team2 = pool[size:size*2]
-    return team1, team2, None
-
-if st.button("랜덤 덱 생성하기"):
-    team1, team2, err = generate_two_teams(characters, team_size)
-
-    if err:
-        st.error(err)
+# 랜덤 파티 생성 버튼
+if st.button("✨ 랜덤 파티 생성 ✨"):
+    if len(characters) < party_size * 2:
+        st.error("캐릭터 수가 부족합니다!")
     else:
-        st.success("랜덤 파티 생성 완료!")
+        selected = random.sample(characters, party_size * 2)
+        team1 = selected[:party_size]
+        team2 = selected[party_size:]
+
+        st.success("🎉 파티 생성 완료! 🎉")
 
         col1, col2 = st.columns(2)
         with col1:
             st.subheader("1파티")
-            st.write(team1)
+            st.info(", ".join(team1))
         with col2:
             st.subheader("2파티")
-            st.write(team2)
+            st.info(", ".join(team2))
 
+        # CSV 다운로드
         df = pd.DataFrame({
-            "Party": ["1st Team"] * len(team1) + ["2nd Team"] * len(team2),
-            "Character": team1 + team2
+            "파티": ["1파티"]*party_size + ["2파티"]*party_size,
+            "캐릭터": team1 + team2
         })
-
         csv = df.to_csv(index=False).encode("utf-8")
-        st.download_button("CSV 다운로드", csv, "genshin_random_teams.csv", "text/csv")
+        st.download_button("💾 CSV 다운로드", csv, "genshin_random_teams.csv", "text/csv")
 
+# Footer
 st.markdown("---")
-st.info("원한다면 속성 균형(원소 조합), 힐러 필수 포함, 방깍/증폭 조합 등 고급 규칙도 추가해드릴 수 있습니다!")
+st.caption("앱 제작: Streamlit | 랜덤 파티 생성기 🎮")
 
-# --------------------
-# requirements.txt 내용 (Streamlit Cloud 업로드용)
-# --------------------
+# requirements.txt 내용
 # streamlit>=1.20
 # pandas
 # numpy
-# matplotlib
